@@ -1,1 +1,3 @@
-# panasonic_tv_lan_remote_api
+# PanRem
+
+Node.js remote control for Panasonic Viera TVs.
