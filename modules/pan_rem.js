@@ -1,4 +1,4 @@
-/* PanRem - Panasonic Network Remote Control
+/* PanRem - Panasonic TV Network Remote Control
  * @description      Node modul using the SOAP API of Panasonic
  * Viera Devices by simulating a IOS device. The API provides 
  * no backchannel to read out settings of the device (for hints, 
@@ -207,9 +207,6 @@ module.exports = (function(){
     PanRem.prototype.then = (_f)=>{
         _f();
         return PanRem.prototype;
-    };
-    PanRem.prototype.scopeTest = ()=>{
-        console.log();
     };
 
     // events
