@@ -125,7 +125,7 @@ module.exports = (function(){
         }).write(data);
         //com.end();
     }
-    // event if request sucess
+    // event if request succeeded
     var on_response_call_back = ()=>{
 
     };
@@ -133,7 +133,7 @@ module.exports = (function(){
     var on_response_error = ()=>{
 
     };
-    // event for both, sucess & error
+    // event for both, success & error
     var on_any = ()=>{
 
     };
