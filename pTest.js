@@ -7,6 +7,9 @@ vieraTX.on("response",(m)=>{
     console.log("sent");
 }).on("response_error",(m)=>{
     console.log("Command couldn't sent.\n"+m);
+}).on("device_list",(l)=>{
+    console.log("List of devices in local network:");
+    console.log(l);
 });
 
 vieraTX.define_device("192.168.0.1",5501);

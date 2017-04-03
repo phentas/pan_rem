@@ -114,7 +114,8 @@ module.exports = (function(){
         
         com = http.request(options, function(chunk) {
             on_any(chunk);
-        }).on('data', function (chunk) {
+        });
+        com.on('data', function (chunk) {
             on_response_call_back(chunk);
             on_any(chunk);
         }).on('error', function (chunk) {
@@ -123,7 +124,7 @@ module.exports = (function(){
         }).on('end', function (chunk) {
             on_any(chunk);
         }).write(data);
-        //com.end();
+        com.end();
     }
     // event if request succeeded
     var on_response_call_back = ()=>{
@@ -137,6 +138,9 @@ module.exports = (function(){
     var on_any = ()=>{
 
     };
+     // event for both, success & error
+    var on_get_devices_list = (_l)=>{
+    };
 
     // public area
     
@@ -145,16 +149,18 @@ module.exports = (function(){
      * to console. 
      */
     PanRem.prototype.list_devices = ()=>{
+        var dev_list=[];
         exec(" ifconfig | grep broadcast | arp -a", (error, stdout, stderr)=>{
             if (error !== null) {
-                console.log('exec error: ' + error);
+                console.log('exec error in list_device: ' + error);
             }else{
                 var out = stdout.split("\n");
                 for(var part in out){
                     try{
-                        console.log(out[part].split(" ")[0] + " - " + out[part].split(" ")[1].replace("(","").replace(")",""));
+                        dev_list.push({'name':out[part].split(" ")[0],'ip':out[part].split(" ")[1].replace("(","").replace(")","")});
                     }catch(e){}
                 }
+                on_get_devices_list(dev_list);
             }
         });
     };
@@ -218,6 +224,9 @@ module.exports = (function(){
                 break;
             case "response_error":
                 on_response_error = _f;
+                break;
+            case "device_list":
+                on_get_devices_list = _f;
                 break;
             default:
                 on_any = _f;
